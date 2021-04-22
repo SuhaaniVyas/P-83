@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body class="body_backgorund">
+
+    <div align="center">
+    <h1>Paint</h1>
+    
+        <canvas id="c" width="800" height="600"></canvas>
+            <br><br >
+    <style>
+        h1
+{
+ color: black;
+	font-size: 40px;
+}
+.body_backgorund {
+	background-size: cover;
+	background-position: center;
+    background-image: url("87128773-abstract-colorful-painting-texture-background-colorful-brush-background.jpg");
+}
+
+#c{
+background-color: aliceblue;
+border: black 3px ridge;
+
+}
+    </style>
+    <script>
+  cv = document.getElementById("c");
+ctx = cv.getContext("2d");
+var me;
+cv.addEventListener("mousedown",MyMousedown);
+function MyMousedown(e) {
+    me="mousedown";
+    radius= document.getElementById("radius");
+    console.log(me);
+}
+cv.addEventListener("mouseup",MyMouseup);
+function MyMouseup(e) {
+    me="mouseup";
+    console.log(me);
+}
+cv.addEventListener("mouseleave",MyMouseleave);
+function MyMouseleave(e) {
+    me="mouseleave";
+    console.log(me);
+}
+cv.addEventListener("mousemove",MyMousemove);
+function MyMousemove(e) {
+    x= e.clientX-cv.offsetLeft;
+   y= e.clientY-cv.offsetTop;
+    if (me=="mousedown") {
+        console.log("x and y");
+        console.log("x ="+ x + "y =" + y);
+        ctx.beginPath();
+        ctx.strokeStyle= "red";
+        ctx.lineWidth= "1";
+ctx.arc(x, y, 20, 0, 100* Math.PI);
+
+ctx.stroke();
+
+    }
+    lastx=x;
+    lasty=y;    
+    }
+    var width= screen.width;
+var height= screen.height;
+
+if (width<900) {
+    cv.width= width -70;
+    cv.height= height -300;
+    document.body.style.overflow= "hidden";
+}
+var startx, starty, endx, endy;
+cv.addEventListener("touchstart", MyTouchStart);
+function MyTouchStart(e) {
+  startx= e.touches[0].clientX-cv.offsetLeft;
+  starty= e.touches[0].clientY-cv.offsetTop;
+}
+console.log("hi")
+
+cv.addEventListener("touchmove", MyTouchMove);
+function MyTouchMove(e) {
+    endx= e.touches[0].clientX-cv.offsetLeft;
+  endy= e.touches[0].clientY-cv.offsetTop;
+  console.log("startx and starty");
+        console.log("startx ="+ startx + "starty =" + starty);
+        ctx.beginPath();
+        ctx.strokeStyle= "red";
+        ctx.lineWidth= "1";
+    
+ctx.arc(endx, endy, 20, 0, 100* Math.PI);
+ctx.stroke();
+}
+
+
+
+
+    </script>
+<body>
+    
+</body>
+</html>
